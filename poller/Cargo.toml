@@ -1,0 +1,25 @@
+[package]
+name = "poller"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+clap = { version = "4.5.38", features = ["derive"] }
+csnmp = "0.6.0"
+futures = "0.3.31"
+humantime = "2.2.0"
+reqwest = "0.12.16"
+tokio = { version = "1.45.1", features = ["full"] }
+polars = { version = "0.48.1", features = ["lazy", "temporal", "describe", "json", "parquet", "dtype-datetime", "performant", "cse", "timezones", "serde"] }
+chrono = { version = "0.4.41", features = ["pure-rust-locales", "serde"] }
+tracing = "0.1.41"
+tracing-subscriber = { version = "0.3.19", features = ["chrono", "env-filter", "time"] }
+[target.'cfg(not(target_env = "msvc"))'.dependencies]
+tikv-jemallocator = { version = "0.6", optional = true }
+
+[build-dependencies]
+rustc_version = "0.4"
+
+[features]
+jemalloc = ["tikv-jemallocator"]
+default = []
